@@ -14,18 +14,13 @@ def _get_kwargs(
     client: Client,
     param_query: Union[Unset, None, str] = UNSET,
     param_header: Union[Unset, str] = UNSET,
-    param_cookie: Union[Unset, str] = UNSET,
 ) -> Dict[str, Any]:
     url = "{}/same-name-multiple-locations/{param}".format(client.base_url, param=param_path)
 
     headers: Dict[str, str] = client.get_headers()
-    cookies: Dict[str, Any] = client.get_cookies()
 
     if not isinstance(param_header, Unset):
         headers["param"] = param_header
-
-    if param_cookie is not UNSET:
-        cookies["param"] = param_cookie
 
     params: Dict[str, Any] = {}
     params["param"] = param_query
@@ -36,7 +31,6 @@ def _get_kwargs(
         "method": "get",
         "url": url,
         "headers": headers,
-        "cookies": cookies,
         "timeout": client.get_timeout(),
         "params": params,
     }
@@ -66,14 +60,12 @@ def sync_detailed(
     client: Client,
     param_query: Union[Unset, None, str] = UNSET,
     param_header: Union[Unset, str] = UNSET,
-    param_cookie: Union[Unset, str] = UNSET,
 ) -> Response[Any]:
     """
     Args:
         param_path (str):
         param_query (Union[Unset, None, str]):
         param_header (Union[Unset, str]):
-        param_cookie (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -88,7 +80,6 @@ def sync_detailed(
         client=client,
         param_query=param_query,
         param_header=param_header,
-        param_cookie=param_cookie,
     )
 
     response = httpx.request(
@@ -105,14 +96,12 @@ async def asyncio_detailed(
     client: Client,
     param_query: Union[Unset, None, str] = UNSET,
     param_header: Union[Unset, str] = UNSET,
-    param_cookie: Union[Unset, str] = UNSET,
 ) -> Response[Any]:
     """
     Args:
         param_path (str):
         param_query (Union[Unset, None, str]):
         param_header (Union[Unset, str]):
-        param_cookie (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -127,7 +116,6 @@ async def asyncio_detailed(
         client=client,
         param_query=param_query,
         param_header=param_header,
-        param_cookie=param_cookie,
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:

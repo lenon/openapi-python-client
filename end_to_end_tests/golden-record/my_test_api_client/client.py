@@ -10,7 +10,6 @@ class Client:
 
     Attributes:
         base_url: The base URL for the API, all requests are made to a relative path to this URL
-        cookies: A dictionary of cookies to be sent with every request
         headers: A dictionary of headers to be sent with every request
         timeout: The maximum amount of a time in seconds a request can take. API functions will raise
             httpx.TimeoutException if this is exceeded.
@@ -21,7 +20,6 @@ class Client:
     """
 
     base_url: str
-    cookies: Dict[str, str] = attr.ib(factory=dict, kw_only=True)
     headers: Dict[str, str] = attr.ib(factory=dict, kw_only=True)
     timeout: float = attr.ib(5.0, kw_only=True)
     verify_ssl: Union[str, bool, ssl.SSLContext] = attr.ib(True, kw_only=True)
@@ -34,13 +32,6 @@ class Client:
     def with_headers(self, headers: Dict[str, str]) -> "Client":
         """Get a new client matching this one with additional headers"""
         return attr.evolve(self, headers={**self.headers, **headers})
-
-    def get_cookies(self) -> Dict[str, str]:
-        return {**self.cookies}
-
-    def with_cookies(self, cookies: Dict[str, str]) -> "Client":
-        """Get a new client matching this one with additional cookies"""
-        return attr.evolve(self, cookies={**self.cookies, **cookies})
 
     def get_timeout(self) -> float:
         return self.timeout

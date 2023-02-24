@@ -20,7 +20,6 @@ def _get_kwargs(
     url = "{}/location/query/optionality".format(client.base_url)
 
     headers: Dict[str, str] = client.get_headers()
-    cookies: Dict[str, Any] = client.get_cookies()
 
     params: Dict[str, Any] = {}
     json_not_null_required = not_null_required.isoformat()
@@ -51,7 +50,6 @@ def _get_kwargs(
         "method": "get",
         "url": url,
         "headers": headers,
-        "cookies": cookies,
         "timeout": client.get_timeout(),
         "params": params,
     }

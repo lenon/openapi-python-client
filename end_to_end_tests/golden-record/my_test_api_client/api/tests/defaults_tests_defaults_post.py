@@ -31,7 +31,6 @@ def _get_kwargs(
     url = "{}/tests/defaults".format(client.base_url)
 
     headers: Dict[str, str] = client.get_headers()
-    cookies: Dict[str, Any] = client.get_cookies()
 
     params: Dict[str, Any] = {}
     params["string_prop"] = string_prop
@@ -93,7 +92,6 @@ def _get_kwargs(
         "method": "post",
         "url": url,
         "headers": headers,
-        "cookies": cookies,
         "timeout": client.get_timeout(),
         "params": params,
     }

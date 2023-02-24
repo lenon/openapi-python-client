@@ -17,7 +17,6 @@ def _get_kwargs(
     url = "{}/common_parameters_overriding/{param}".format(client.base_url, param=param_path)
 
     headers: Dict[str, str] = client.get_headers()
-    cookies: Dict[str, Any] = client.get_cookies()
 
     params: Dict[str, Any] = {}
     params["param"] = param_query
@@ -28,7 +27,6 @@ def _get_kwargs(
         "method": "delete",
         "url": url,
         "headers": headers,
-        "cookies": cookies,
         "timeout": client.get_timeout(),
         "params": params,
     }

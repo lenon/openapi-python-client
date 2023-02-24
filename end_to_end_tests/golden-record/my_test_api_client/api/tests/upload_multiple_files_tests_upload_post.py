@@ -17,7 +17,6 @@ def _get_kwargs(
     url = "{}/tests/upload/multiple".format(client.base_url)
 
     headers: Dict[str, str] = client.get_headers()
-    cookies: Dict[str, Any] = client.get_cookies()
 
     multipart_multipart_data = []
     for multipart_data_item_data in multipart_data:
@@ -29,7 +28,6 @@ def _get_kwargs(
         "method": "post",
         "url": url,
         "headers": headers,
-        "cookies": cookies,
         "timeout": client.get_timeout(),
         "files": multipart_multipart_data,
     }

@@ -18,7 +18,6 @@ from . import (
     post_form_data_inline,
     post_tests_json_body_string,
     test_inline_objects,
-    token_with_cookie_auth_token_with_cookie_get,
     unsupported_content_tests_unsupported_content_get,
     upload_file_tests_upload_post,
     upload_multiple_files_tests_upload_post,
@@ -144,13 +143,6 @@ class TestsEndpoints:
         Test Inline Objects
         """
         return test_inline_objects
-
-    @classmethod
-    def token_with_cookie_auth_token_with_cookie_get(cls) -> types.ModuleType:
-        """
-        Test optional cookie parameters
-        """
-        return token_with_cookie_auth_token_with_cookie_get
 
     @classmethod
     def callback_test(cls) -> types.ModuleType:

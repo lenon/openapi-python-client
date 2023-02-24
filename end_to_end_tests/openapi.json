@@ -781,40 +781,6 @@
         }
       }
     },
-    "/auth/token_with_cookie": {
-      "get": {
-        "tags": [
-          "tests"
-        ],
-        "summary": "TOKEN_WITH_COOKIE",
-        "description": "Test optional cookie parameters",
-        "operationId": "token_with_cookie_auth_token_with_cookie_get",
-        "parameters": [
-          {
-            "required": true,
-            "schema": {
-              "title": "Token",
-              "type": "string"
-            },
-            "name": "MyToken",
-            "in": "cookie"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    },
     "/common_parameters": {
       "parameters": [
         {
@@ -910,13 +876,6 @@
           {
             "name": "param",
             "in": "header",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "param",
-            "in": "cookie",
             "schema": {
               "type": "string"
             }
@@ -1164,7 +1123,6 @@
             "$ref": "#/components/parameters/integer-param"
           },
           {"$ref": "#/components/parameters/header-param"},
-          {"$ref": "#/components/parameters/cookie-param"},
           {"$ref": "#/components/parameters/path-param"}
         ],
         "responses": {
@@ -2267,14 +2225,6 @@
       "header-param": {
         "name": "header param",
         "in": "header",
-        "required": false,
-        "schema": {
-          "type": "string"
-        }
-      },
-      "cookie-param": {
-        "name": "cookie param",
-        "in": "cookie",
         "required": false,
         "schema": {
           "type": "string"

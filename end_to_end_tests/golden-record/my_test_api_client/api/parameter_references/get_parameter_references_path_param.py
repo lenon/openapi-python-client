@@ -15,16 +15,12 @@ def _get_kwargs(
     string_param: str,
     integer_param: int = 0,
     header_param: str,
-    cookie_param: str,
 ) -> Dict[str, Any]:
     url = "{}/parameter-references/{path_param}".format(client.base_url, path_param=path_param)
 
     headers: Dict[str, str] = client.get_headers()
-    cookies: Dict[str, Any] = client.get_cookies()
 
     headers["header param"] = header_param
-
-    cookies["cookie param"] = cookie_param
 
     params: Dict[str, Any] = {}
     params["string param"] = string_param
@@ -37,7 +33,6 @@ def _get_kwargs(
         "method": "get",
         "url": url,
         "headers": headers,
-        "cookies": cookies,
         "timeout": client.get_timeout(),
         "params": params,
     }
@@ -68,7 +63,6 @@ def sync_detailed(
     string_param: str,
     integer_param: int = 0,
     header_param: str,
-    cookie_param: str,
 ) -> Response[Any]:
     """Test different types of parameter references
 
@@ -77,7 +71,6 @@ def sync_detailed(
         string_param (str):
         integer_param (int):
         header_param (str):
-        cookie_param (str):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -93,7 +86,6 @@ def sync_detailed(
         string_param=string_param,
         integer_param=integer_param,
         header_param=header_param,
-        cookie_param=cookie_param,
     )
 
     response = httpx.request(
@@ -111,7 +103,6 @@ async def asyncio_detailed(
     string_param: str,
     integer_param: int = 0,
     header_param: str,
-    cookie_param: str,
 ) -> Response[Any]:
     """Test different types of parameter references
 
@@ -120,7 +111,6 @@ async def asyncio_detailed(
         string_param (str):
         integer_param (int):
         header_param (str):
-        cookie_param (str):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -136,7 +126,6 @@ async def asyncio_detailed(
         string_param=string_param,
         integer_param=integer_param,
         header_param=header_param,
-        cookie_param=cookie_param,
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:

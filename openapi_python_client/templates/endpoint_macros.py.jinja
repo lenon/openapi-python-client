@@ -15,19 +15,6 @@
 {% endif %}
 {% endmacro %}
 
-{% macro cookie_params(endpoint) %}
-{% if endpoint.cookie_parameters %}
-    {% for parameter in endpoint.cookie_parameters.values() %}
-        {% if parameter.required %}
-cookies["{{ parameter.name}}"] = {{ parameter.python_name }}
-        {% else %}
-if {{ parameter.python_name }} is not UNSET:
-    cookies["{{ parameter.name}}"] = {{ parameter.python_name }}
-        {% endif %}
-    {% endfor %}
-{% endif %}
-{% endmacro %}
-
 
 {% macro query_params(endpoint) %}
 {% if endpoint.query_parameters %}
@@ -108,10 +95,6 @@ json_body: {{ endpoint.json_body.get_type_string() }},
 {% for parameter in endpoint.header_parameters.values() %}
 {{ parameter.to_string() }},
 {% endfor %}
-{# cookie parameters #}
-{% for parameter in endpoint.cookie_parameters.values() %}
-{{ parameter.to_string() }},
-{% endfor %}
 {% endmacro %}
 
 {# Just lists all kwargs to endpoints as name=name for passing to other functions #}
@@ -133,9 +116,6 @@ json_body=json_body,
 {{ parameter.python_name }}={{ parameter.python_name }},
 {% endfor %}
 {% for parameter in endpoint.header_parameters.values() %}
-{{ parameter.python_name }}={{ parameter.python_name }},
-{% endfor %}
-{% for parameter in endpoint.cookie_parameters.values() %}
 {{ parameter.python_name }}={{ parameter.python_name }},
 {% endfor %}
 {% endmacro %}

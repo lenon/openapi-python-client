@@ -23,7 +23,6 @@ def _get_kwargs(
     url = "{}/location/header/types".format(client.base_url)
 
     headers: Dict[str, str] = client.get_headers()
-    cookies: Dict[str, Any] = client.get_cookies()
 
     if not isinstance(boolean_header, Unset):
         headers["Boolean-Header"] = "true" if boolean_header else "false"
@@ -47,7 +46,6 @@ def _get_kwargs(
         "method": "get",
         "url": url,
         "headers": headers,
-        "cookies": cookies,
         "timeout": client.get_timeout(),
     }
 
