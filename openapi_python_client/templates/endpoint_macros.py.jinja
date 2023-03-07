@@ -70,12 +70,7 @@ params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 {{ parameter.to_string() }},
 {% endfor %}
 *,
-{# Proper client based on whether or not the endpoint requires authentication #}
-{% if endpoint.requires_security %}
-client: AuthenticatedClient,
-{% else %}
 client: Client,
-{% endif %}
 {# Form data if any #}
 {% if endpoint.form_body %}
 form_data: {{ endpoint.form_body.get_type_string() }},

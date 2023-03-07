@@ -265,6 +265,11 @@ class Project:  # pylint: disable=too-many-instance-attributes
         client_template = self.env.get_template("client.py.jinja")
         client_path.write_text(client_template.render(), encoding=self.file_encoding)
 
+        # Generate jwt
+        jwt_path = self.package_dir / "jwt.py"
+        jwt_template = self.env.get_template("jwt.py.jinja")
+        jwt_path.write_text(jwt_template.render(), encoding=self.file_encoding)
+
         # Generate included Errors
         errors_path = self.package_dir / "errors.py"
         errors_template = self.env.get_template("errors.py.jinja")
