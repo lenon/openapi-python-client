@@ -38,7 +38,7 @@ def _parse_response(*, client: Client, response: httpx.Response) -> Union[HTTPVa
 
         return response_422
     else:
-        raise errors.UnexpectedStatus(f"Unexpected status code: {response.status_code}")
+        raise errors.UnexpectedStatus(f"Unexpected status code: {response.status_code}", response=response)
 
 
 def _build_response(*, client: Client, response: httpx.Response) -> Response[Union[HTTPValidationError, str]]:

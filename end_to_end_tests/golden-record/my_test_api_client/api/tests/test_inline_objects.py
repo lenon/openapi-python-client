@@ -36,7 +36,7 @@ def _parse_response(*, client: Client, response: httpx.Response) -> TestInlineOb
 
         return response_200
     else:
-        raise errors.UnexpectedStatus(f"Unexpected status code: {response.status_code}")
+        raise errors.UnexpectedStatus(f"Unexpected status code: {response.status_code}", response=response)
 
 
 def _build_response(*, client: Client, response: httpx.Response) -> Response[TestInlineObjectsResponse200]:
