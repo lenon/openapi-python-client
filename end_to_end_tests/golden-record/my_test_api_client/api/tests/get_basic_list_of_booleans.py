@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, Dict, List, cast
 
 import httpx
 
@@ -24,15 +24,13 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, client: Client, response: httpx.Response) -> Optional[List[bool]]:
+def _parse_response(*, client: Client, response: httpx.Response) -> List[bool]:
     if response.status_code == HTTPStatus.OK:
         response_200 = cast(List[bool], response.json())
 
         return response_200
-    if client.raise_on_unexpected_status:
-        raise errors.UnexpectedStatus(f"Unexpected status code: {response.status_code}")
     else:
-        return None
+        raise errors.UnexpectedStatus(f"Unexpected status code: {response.status_code}")
 
 
 def _build_response(*, client: Client, response: httpx.Response) -> Response[List[bool]]:
@@ -53,7 +51,6 @@ def sync_detailed(
      Get a list of booleans
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
@@ -75,13 +72,12 @@ def sync_detailed(
 def sync(
     *,
     client: Client,
-) -> Optional[List[bool]]:
+) -> List[bool]:
     """Get Basic List Of Booleans
 
      Get a list of booleans
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
@@ -102,7 +98,6 @@ async def asyncio_detailed(
      Get a list of booleans
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
@@ -122,13 +117,12 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: Client,
-) -> Optional[List[bool]]:
+) -> List[bool]:
     """Get Basic List Of Booleans
 
      Get a list of booleans
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:

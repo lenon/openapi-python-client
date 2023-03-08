@@ -1,6 +1,6 @@
 import datetime
 from http import HTTPStatus
-from typing import Any, Dict, List, Optional, Union, cast
+from typing import Any, Dict, List, Union, cast
 
 import httpx
 from dateutil.parser import isoparse
@@ -97,7 +97,7 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, client: Client, response: httpx.Response) -> Optional[Union[Any, HTTPValidationError]]:
+def _parse_response(*, client: Client, response: httpx.Response) -> Union[Any, HTTPValidationError]:
     if response.status_code == HTTPStatus.OK:
         response_200 = cast(Any, response.json())
         return response_200
@@ -105,10 +105,8 @@ def _parse_response(*, client: Client, response: httpx.Response) -> Optional[Uni
         response_422 = HTTPValidationError.from_dict(response.json())
 
         return response_422
-    if client.raise_on_unexpected_status:
-        raise errors.UnexpectedStatus(f"Unexpected status code: {response.status_code}")
     else:
-        return None
+        raise errors.UnexpectedStatus(f"Unexpected status code: {response.status_code}")
 
 
 def _build_response(*, client: Client, response: httpx.Response) -> Response[Union[Any, HTTPValidationError]]:
@@ -151,7 +149,6 @@ def sync_detailed(
         required_model_prop (ModelWithUnionProperty):
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
@@ -195,7 +192,7 @@ def sync(
     enum_prop: AnEnum,
     model_prop: "ModelWithUnionProperty",
     required_model_prop: "ModelWithUnionProperty",
-) -> Optional[Union[Any, HTTPValidationError]]:
+) -> Union[Any, HTTPValidationError]:
     """Defaults
 
     Args:
@@ -212,7 +209,6 @@ def sync(
         required_model_prop (ModelWithUnionProperty):
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
@@ -266,7 +262,6 @@ async def asyncio_detailed(
         required_model_prop (ModelWithUnionProperty):
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
@@ -308,7 +303,7 @@ async def asyncio(
     enum_prop: AnEnum,
     model_prop: "ModelWithUnionProperty",
     required_model_prop: "ModelWithUnionProperty",
-) -> Optional[Union[Any, HTTPValidationError]]:
+) -> Union[Any, HTTPValidationError]:
     """Defaults
 
     Args:
@@ -325,7 +320,6 @@ async def asyncio(
         required_model_prop (ModelWithUnionProperty):
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:

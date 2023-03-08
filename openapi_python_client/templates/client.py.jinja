@@ -16,8 +16,6 @@ class Client:
             httpx.TimeoutException if this is exceeded.
         verify_ssl: Whether or not to verify the SSL certificate of the API server. This should be True in production,
             but can be set to False for testing purposes.
-        raise_on_unexpected_status: Whether or not to raise an errors.UnexpectedStatus if the API returns a
-            status code that was not documented in the source OpenAPI document.
         key: The private key used to sign the JWT encoded with ES256.
         key_fingerprint: Key ID or fingerprint.
         jwt_expiration: Controls the expiration time for a JWT. 60 seconds by default.
@@ -27,7 +25,6 @@ class Client:
     headers: Dict[str, str] = attr.ib(factory=dict, kw_only=True)
     timeout: float = attr.ib(5.0, kw_only=True)
     verify_ssl: Union[str, bool, ssl.SSLContext] = attr.ib(True, kw_only=True)
-    raise_on_unexpected_status: bool = attr.ib(False, kw_only=True)
 
     key: str = attr.ib(kw_only=True)
     key_fingerprint: str = attr.ib(kw_only=True)
